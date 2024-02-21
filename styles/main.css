@@ -69,8 +69,15 @@ body {
     background-size: cover;
 }
 
-button {
+#resetbutton {
     background-color:plum;
     font-size: larger;
     font-weight: bold;
+}
+
+#bombbtn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+
 }

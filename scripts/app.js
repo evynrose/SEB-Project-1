@@ -34,6 +34,7 @@ var board;
 var rows = 6;
 var columns = 7;
 var currColumns = []; //keeps track of which row each column is at.
+var bombUsed = false; //whether the bomb has been used or not
 
 window.onload = function () {
   setGame();
@@ -42,6 +43,7 @@ window.onload = function () {
 function setGame() {
   board = [];
   currColumns = [5, 5, 5, 5, 5, 5, 5];
+  bombUsed = false; // resets the bomb at the start of the game
 
   for (let r = 0; r < rows; r++) {
     let row = [];
@@ -77,6 +79,12 @@ function setPiece() {
     return;
   }
 
+  if (!bombUsed) {
+    // Check if bomb has been used in this turn
+    dropBomb(); // If not, drop the bomb before setting the piece
+    bombUsed = true; // Mark the bomb as used for this turn
+  }
+
   board[r][c] = currPlayer; //update JS board
   let tile = document.getElementById(r.toString() + "-" + c.toString());
   if (currPlayer == playerKitten) {
@@ -91,6 +99,37 @@ function setPiece() {
   currColumns[c] = r; //update the array
 
   checkWinner();
+}
+
+function dropBomb() {
+  if (gameOver) {
+    return;
+  }
+}
+
+function dropBomb() {
+  if (gameOver) {
+    return;
+  }
+
+  // Iterate through each column to find the last placed piece
+  for (let c = 0; c < columns; c++) {
+    let r = currColumns[c]; // Get the row of the last placed piece in the column
+    if (r < 5) {
+      // Ensure there's a piece to remove
+      let tileAbove = document.getElementById(
+        (r + 1).toString() + "-" + c.toString()
+      );
+      if (
+        tileAbove.classList.contains("kitten-piece") ||
+        tileAbove.classList.contains("puppy-piece")
+      ) {
+        tileAbove.classList.remove("kitten-piece", "puppy-piece"); // Remove the piece from the UI
+        board[r + 1][c] = " "; // Reset the corresponding cell in the board array
+        return; // Exit the function after removing one piece
+      }
+    }
+  }
 }
 
 function checkWinner() {
@@ -172,3 +211,6 @@ function setWinner(r, c) {
 
 let button = document.getElementById("resetbutton");
 button.addEventListener("click", () => location.reload());
+
+let bombButton = document.getElementById("bombBtn");
+bombButton.addEventListener("click", dropBomb);
