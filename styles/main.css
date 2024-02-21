@@ -1,22 +1,76 @@
-* {
+/* * {
     box-sizing: border-box;
 }
-/* i will take my class of board and then add a grid + cells to it  */
- .board {
-     display: grid;
-     grid-template-columns: repeat(7, 50px);
-     grid-template-rows: repeat(6, 50px);
-     gap: 5px;
-     margin-bottom: 20px;
- }
 
- .cell {
-     width: 50px;
-     height: 50px;
-     border: 1px solid black;
-     background-color: #fff;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     font-size: 24px;
- }
+.container {
+max-width: 530px;
+margin: 0 auto;
+padding: 10px;
+}
+
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(6, 80px);
+    grid-template-rows: repeat(6, 80px);
+    gap: 5px;
+    margin-bottom: 20px;
+    border: 2px solid blueviolet;
+    background-color: violet;
+    padding: 5px;
+
+}
+
+.cell {
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+} */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: #C8A2C8;
+}
+
+.board {
+    height: 540px;
+    width: 630px;
+    background-color: violet;
+    border: 10px solid blueviolet;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tile {
+    height: 70px;
+    width: 70px;
+    margin: 5px;
+
+    /* Circle */
+    background-color: white;
+    border-radius: 50%;
+    border: 5px solid blueviolet;
+}
+.kitten-piece {
+    background-image: url("/images/kitten.png");
+    background-size: cover;
+}
+
+.puppy-piece {
+    background-image: url("/images/puppy.png");
+    background-size: cover;
+}
+
+button {
+    background-color:plum;
+    font-size: larger;
+    font-weight: bold;
+}
