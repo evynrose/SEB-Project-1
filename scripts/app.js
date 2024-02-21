@@ -1,29 +1,3 @@
-// 1) grid with correct numbers
-// 2) create cells  (can i click and change the background?)
-// 3) can the players take turns?
-// 4) how can you tell someone has won the game? - how they've won,
-
-//focus on fundamentals,
-
-// // Function to create the game board
-// function createBoard() {
-//   var board = document.getElementById("board");
-//   for (var i = 0; i < 6; i++) {
-//     for (var j = 0; j < 6; j++) {
-//       var cell = document.createElement("div");
-//       cell.classList.add("cell");
-//       cell.addEventListener("click", function () {
-//         this.style.backgroundImage = "url('images/kitten.png')"; // Change the background image of cell
-//         this.style.backgroundSize = "cover";
-//       });
-//       board.appendChild(cell);
-//     }
-//   }
-// }
-
-// // Call the createBoard function to generate the game board
-// createBoard();
-
 var playerKitten = "K";
 var playerPuppy = "P";
 var currPlayer = playerKitten;
@@ -124,9 +98,9 @@ function dropBomb() {
         tileAbove.classList.contains("kitten-piece") ||
         tileAbove.classList.contains("puppy-piece")
       ) {
-        tileAbove.classList.remove("kitten-piece", "puppy-piece"); // Remove the piece from the UI
+        tileAbove.classList.remove("kitten-piece", "puppy-piece"); // Remove the piece
         board[r + 1][c] = " "; // Reset the corresponding cell in the board array
-        return; // Exit the function after removing one piece
+        return; // leave the function after removing one piece
       }
     }
   }

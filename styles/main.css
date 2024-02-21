@@ -1,38 +1,4 @@
-/* * {
-    box-sizing: border-box;
-}
 
-.container {
-max-width: 530px;
-margin: 0 auto;
-padding: 10px;
-}
-
-
-.board {
-    display: grid;
-    grid-template-columns: repeat(6, 80px);
-    grid-template-rows: repeat(6, 80px);
-    gap: 5px;
-    margin-bottom: 20px;
-    border: 2px solid blueviolet;
-    background-color: violet;
-    padding: 5px;
-
-}
-
-.cell {
-    width: 70px;
-    height: 70px;
-    border: 1px solid black;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-} */
 body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
@@ -75,9 +41,12 @@ body {
     font-weight: bold;
 }
 
-#bombbtn {
-    margin-top: 10px;
-    padding: 5px 10px;
-    font-size: 16px;
-
+#bombBtn {
+    width: 150px;
+    height: 150px;
+    background-image: url(/images/catbomb.png);
+    background-size: cover;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: end;
 }
