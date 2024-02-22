@@ -9,7 +9,6 @@ var rows = 6;
 var columns = 7;
 var currColumns = []; //keeps track of which row each column is at.
 var bombUsed = false; //whether the bomb has been used or not
-// var myBomb = document.getElementById("myBomb");
 
 window.onload = function () {
   setGame();
@@ -56,60 +55,40 @@ function setPiece() {
 
   if (!bombUsed) {
     // Check if bomb has been used in this turn
-    dropBomb(); // If not, drop the bomb before setting the piece
     bombUsed = true; // Mark the bomb as used for this turn
   }
 
   board[r][c] = currPlayer; //update JS board
   let tile = document.getElementById(r.toString() + "-" + c.toString());
   if (currPlayer === playerKitten) {
-    // console.log(myObject[0]);
-    tile.classList.add("kitten-piece"); //if current player = kitten, and if kitten.length === 1 then dropBomb && pop.myObjectKitten <-- same for puppy
+    tile.classList.add("kitten-piece");
     currPlayer = playerPuppy;
   } else {
-    // console.log(myObject[1]);
     tile.classList.add("puppy-piece");
     currPlayer = playerKitten;
   }
 
-  //   if (currPlayer === playerKitten && myObject[0] === "kitten") {
-  //     console.log("bombButton");
-  //     console.log(myObject);
-  //     myBomb.disabled = true;
-  //   }
-
   r -= 1; //update the row height for that column
   currColumns[c] = r; //update the array
-  //   myBombFunc();
   checkWinner();
 }
-// const myObject = ["kitten", "puppy"];
-// function myBombFunc() {
-//   console.log("button clicked");
 
-//   if (currPlayer === playerKitten && myObject[0] === "kitten") {
-//     myObject.shift();
-//     console.log("bombButton");
-//     console.log(myObject);
-//     // myBomb.disabled = true;
-//   }
-//   if (currPlayer === playerPuppy && myObject[1] === "puppy") {
-//     myObject.pop();
-//     console.log("bombButton");
-//     console.log(myObject);
-//     // myBomb.disabled = true;
-//   }
-// }
+let kittenBombDropped = false;
+let puppyBombDropped = false;
+
 function dropBomb() {
-  if (gameOver) {
+  if (
+    gameOver ||
+    (currPlayer === playerPuppy && puppyBombDropped) ||
+    (currPlayer === playerKitten && kittenBombDropped)
+  ) {
     return;
   }
-}
-
-function dropBomb() {
-  //
-  if (gameOver) {
-    return;
+  if (currPlayer === playerKitten) {
+    kittenBombDropped = true;
+  }
+  if (currPlayer === playerPuppy) {
+    puppyBombDropped = true;
   }
 
   // Iterate through each column to find the last placed piece
@@ -225,8 +204,6 @@ button.addEventListener("click", () => location.reload());
 let bombButton = document.getElementById("bombBtn");
 bombButton.addEventListener("click", dropBomb);
 
-// myBomb.addEventListener("click", myBombFunc);
-
 const audio = document.getElementById("audio");
 const toggleButton = document.getElementById("toggleButton");
 
@@ -239,12 +216,3 @@ toggleButton.addEventListener("click", function () {
     toggleButton.textContent = "🔈";
   }
 });
-
-// playerKitten = { name : “K”, bombdropped: False}
-
-// Nathalie Kirch to Everyone (21 Feb 2024, 6:28 pm)
-// At the end of dropbomb function, current player.bomdropped = True
-// if currentPlayer.bombdropped === True : return
-
-//create object with playerkitten as 1, playerpuppy as 2
-// create the two buttons
