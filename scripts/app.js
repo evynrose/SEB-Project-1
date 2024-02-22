@@ -9,6 +9,7 @@ var rows = 6;
 var columns = 7;
 var currColumns = []; //keeps track of which row each column is at.
 var bombUsed = false; //whether the bomb has been used or not
+// var myBomb = document.getElementById("myBomb");
 
 window.onload = function () {
   setGame();
@@ -61,20 +62,44 @@ function setPiece() {
 
   board[r][c] = currPlayer; //update JS board
   let tile = document.getElementById(r.toString() + "-" + c.toString());
-  if (currPlayer == playerKitten) {
-    tile.classList.add("kitten-piece");
+  if (currPlayer === playerKitten) {
+    // console.log(myObject[0]);
+    tile.classList.add("kitten-piece"); //if current player = kitten, and if kitten.length === 1 then dropBomb && pop.myObjectKitten <-- same for puppy
     currPlayer = playerPuppy;
   } else {
+    // console.log(myObject[1]);
     tile.classList.add("puppy-piece");
     currPlayer = playerKitten;
   }
 
+  //   if (currPlayer === playerKitten && myObject[0] === "kitten") {
+  //     console.log("bombButton");
+  //     console.log(myObject);
+  //     myBomb.disabled = true;
+  //   }
+
   r -= 1; //update the row height for that column
   currColumns[c] = r; //update the array
-
+  //   myBombFunc();
   checkWinner();
 }
+// const myObject = ["kitten", "puppy"];
+// function myBombFunc() {
+//   console.log("button clicked");
 
+//   if (currPlayer === playerKitten && myObject[0] === "kitten") {
+//     myObject.shift();
+//     console.log("bombButton");
+//     console.log(myObject);
+//     // myBomb.disabled = true;
+//   }
+//   if (currPlayer === playerPuppy && myObject[1] === "puppy") {
+//     myObject.pop();
+//     console.log("bombButton");
+//     console.log(myObject);
+//     // myBomb.disabled = true;
+//   }
+// }
 function dropBomb() {
   if (gameOver) {
     return;
@@ -82,6 +107,7 @@ function dropBomb() {
 }
 
 function dropBomb() {
+  //
   if (gameOver) {
     return;
   }
@@ -98,9 +124,19 @@ function dropBomb() {
         tileAbove.classList.contains("kitten-piece") ||
         tileAbove.classList.contains("puppy-piece")
       ) {
-        tileAbove.classList.remove("kitten-piece", "puppy-piece"); // Remove the piece
-        board[r + 1][c] = " "; // Reset the corresponding cell in the board array
-        return; // leave the function after removing one piece
+        // Remove the piece
+        tileAbove.classList.remove("kitten-piece", "puppy-piece");
+        // Reset the corresponding cell in the board array
+        board[r + 1][c] = " ";
+        // Update current row for the column
+        r += 1;
+        currColumns[c] = r;
+        // Ensure the cell becomes playable again
+        let belowTile = document.getElementById(
+          r.toString() + "-" + c.toString()
+        );
+        belowTile.classList.remove("kitten-piece", "puppy-piece");
+        return; // Leave the function after removing one piece
       }
     }
   }
@@ -176,9 +212,9 @@ function setWinner(r, c) {
   let winner = document.getElementById("winner");
   console.log(winner);
   if (board[r][c] == playerKitten) {
-    winner.innerText = "Kitten Wins";
+    winner.innerText = "Kitten Wins!";
   } else {
-    winner.innerText = "Puppy Wins";
+    winner.innerText = "Puppy Wins!";
   }
   gameOver = true;
 }
@@ -188,3 +224,27 @@ button.addEventListener("click", () => location.reload());
 
 let bombButton = document.getElementById("bombBtn");
 bombButton.addEventListener("click", dropBomb);
+
+// myBomb.addEventListener("click", myBombFunc);
+
+const audio = document.getElementById("audio");
+const toggleButton = document.getElementById("toggleButton");
+
+toggleButton.addEventListener("click", function () {
+  if (audio.paused) {
+    audio.play();
+    toggleButton.textContent = "🔇";
+  } else {
+    audio.pause();
+    toggleButton.textContent = "🔈";
+  }
+});
+
+// playerKitten = { name : “K”, bombdropped: False}
+
+// Nathalie Kirch to Everyone (21 Feb 2024, 6:28 pm)
+// At the end of dropbomb function, current player.bomdropped = True
+// if currentPlayer.bombdropped === True : return
+
+//create object with playerkitten as 1, playerpuppy as 2
+// create the two buttons

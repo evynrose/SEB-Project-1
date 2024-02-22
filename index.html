@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,17 +7,34 @@
     <title>Connect 4: KITTENS VS PUPPIES</title>
     <link rel="stylesheet" href="./styles/main.css" />
     <script defer src="./scripts/app.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chicle&display=swap" rel="stylesheet">
   </head>
   <!-- h1- name of game- CONNECT 4: KITTENS VS PUPPIES -->
   <body>
-    <h1>Connect 4: KITTENS VS. PUPPIES</h1>
+    <h1>🐾 Connect 4: KITTENS VS. PUPPIES 🐾</h1>
     <h2 id ="winner">Who's the Winner?!</h2>
+    <div class = "container">
+    <h3> Welcome to Connect 4 with a bit of an EXPLOSION! 
+         The rules are simple, but a little different. 
+         You or your opponent must achieve 4 kittens or puppies in a row. 
+         However, either player has the option to use a CATBOMB to erase
+         the opposing player's last move. 
+         Use this wisely, each player only gets 1 CATBOMB per game. 
+         Happy playing!
+    </h3>
+    </div>
     <!-- i want to keep it simple with only a div class of board + cells that i will then
     grid on CSS and then add functionality as well as cells through css/javascript -->
       <div class="board" id="board"></div>
       <button id="resetbutton">Reset Game</button>
     </div>
     <button id="bombBtn"></button>  
+    <!-- <button id="myBomb"></button> -->
     <!-- drop bomb button-->
+    <audio id="audio" src="sounds/loop.wav" loop></audio>
+
+<button id="toggleButton">🔈</button>
   </body>
 </html>
