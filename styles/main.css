@@ -25,12 +25,12 @@ body {
     border: 5px solid blueviolet;
 }
 .kitten-piece {
-    background-image: url("/images/kitten.png");
+    background-image: url("../images/kitten.png");
     background-size: cover;
 }
 
 .puppy-piece {
-    background-image: url("/images/puppy.png");
+    background-image: url("../images/puppy.png");
     background-size: cover;
 }
 
@@ -47,7 +47,7 @@ body {
 #bombBtn {
     width: 150px;
     height: 150px;
-    background-image: url(/images/catbomb.png);
+    background-image: url("../images/catbomb.png");
     background-size: cover;
     background-color: #C8A2C8;
     color: violet;
