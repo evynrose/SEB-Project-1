@@ -1,12 +1,12 @@
 # Description:
-Embark on a delightful journey with Connect 4, where adorable puppies and kittens take center stage! Experience the classic game with a charming twist as you strategically drop your pieces to achieve victory. Unleash the power of the cat bomb to cleverly thwart your opponent's moves. Each element, including the whimsical character designs, has been lovingly hand-drawn to add a touch of whimsy to your gaming experience.
+Embark on a delightful journey with Connect 4, where adorable puppies and kittens take center stage! Experience the classic game with a charming twist as you strategically drop your pieces to achieve victory. Unleash the power of the cat bomb to cleverly thwart your opponent's moves. Each element, including the whimsical character designs, has been lovingly hand-drawn to add a touch of fun to your gaming experience.
 
 # Deployment link:
-[GitHub Repository](https://github.com/evynrose/SEB-Project-1)
+https://evynrose.github.io/SEB-Project-1/
 
 # Getting Started/Code Installation:
 To enjoy the game locally, simply follow these steps:
-1. Clone the repository from the provided link.
+1. Clone the repository.
 2. Open the index.html file in your favorite web browser.
 
 # Timeframe & Working Team:
@@ -67,29 +67,124 @@ CSS styling was then applied to enhance the visual appeal of the game. Each elem
 
 The heart of the game lies in its JavaScript functionality, where game mechanics and interactivity were brought to life. Functions were implemented to handle dropping pieces, checking for a winner, and activating the cat bomb feature.
 
-
 // Function to set up the game board
 function setGame() {
-  // Game setup logic
+  board = [];
+  currColumns = [5, 5, 5, 5, 5, 5, 5];
+  bombUsed = false; // resets the bomb at the start of the game
+
+  for (let r = 0; r < rows; r++) {
+    let row = [];
+    for (let c = 0; c < columns; c++) {
+      // JS
+      row.push(" ");
+      // HTML
+      let tile = document.createElement("div");
+      tile.id = r.toString() + "-" + c.toString();
+      tile.classList.add("tile");
+      tile.addEventListener("click", setPiece);
+      document.getElementById("board").append(tile);
+    }
+    board.push(row);
+  }
 }
 
 // Function to handle dropping pieces
 function setPiece() {
-  // Piece dropping logic
-}
+  if (gameOver) {
+    return;
+  }
 
-// Function to check for a winner
-function checkWinner() {
-  // Winner checking logic
+  //get coords of that tile clicked
+  let coords = this.id.split("-");
+  let r = parseInt(coords[0]);
+  let c = parseInt(coords[1]);
+
+  // figure out which row the current column should be on
+  r = currColumns[c];
+
+  if (r < 0) {
+    return;
+  }
+
+  if (!bombUsed) {
+    bombUsed = true; // Mark the bomb as used for this turn
+  }
+
+  board[r][c] = currPlayer; //update JS board
+  let tile = document.getElementById(r.toString() + "-" + c.toString());
+  if (currPlayer === playerKitten) {
+    tile.classList.add("kitten-piece");
+    currPlayer = playerPuppy;
+  } else {
+    tile.classList.add("puppy-piece");
+    currPlayer = playerKitten;
+  }
+
+  r -= 1; //update the row height for that column
+  currColumns[c] = r; //update the array
+  checkWinner();
 }
 
 // Function to activate the cat bomb feature
 function dropBomb() {
-  // Cat bomb logic
+  if (
+    gameOver ||
+    (currPlayer === playerPuppy && puppyBombDropped) ||
+    (currPlayer === playerKitten && kittenBombDropped)
+  ) {
+    return;
+  }
+  if (currPlayer === playerKitten) {
+    kittenBombDropped = true;
+  }
+  if (currPlayer === playerPuppy) {
+    puppyBombDropped = true;
+  }
+
+  // Iterate through each column to find the last placed piece
+  for (let c = 0; c < columns; c++) {
+    let r = currColumns[c]; // Get the row of the last placed piece in the column
+    if (r < 5) {
+      let tileAbove = document.getElementById(
+        (r + 1).toString() + "-" + c.toString()
+      );
+      if (
+        tileAbove.classList.contains("kitten-piece") ||
+        tileAbove.classList.contains("puppy-piece")
+      ) {
+        tileAbove.classList.remove("kitten-piece", "puppy-piece");
+        board[r + 1][c] = " ";
+        r += 1;
+        currColumns[c] = r;
+        let belowTile = document.getElementById(
+          r.toString() + "-" + c.toString()
+        );
+        belowTile.classList.remove("kitten-piece", "puppy-piece");
+        return;
+      }
+    }
+  }
 }
 
 
-Each line of code was carefully crafted and iteratively refined to ensure smooth gameplay and optimal user experience. Rigorous testing and debugging were conducted to address any issues and ensure the game's flawless performance.
+Each line of code was carefully crafted and iteratively refined to ensure smooth gameplay and optimal user experience.
 
 The result is a captivating gaming experience that seamlessly blends creativity with tech, offering players an immersive journey into the world of Connect 4 with kittens and puppies.
 
+# Challenges 
+One of the primary challenges encountered was the implementation of the cat bomb feature, requiring careful consideration of game logic and user interaction to ensure seamless functionality without affecting the entire board.
+
+# Wins 
+A significant triumph was achieved in seamlessly integrating hand-drawn character designs into the game, infusing it with my own personality. Additionally, overcoming the challenge of implementing the cat bomb feature was a massive win as well. 
+
+# Key Learnings/Takeaways
+
+This project served as a valuable learning experience, offering insights into JavaScript development and the intricacies of front-end design. It underscored the importance of precision and problem-solving in crafting engaging user experiences.
+
+# Bugs
+Fortunately, no bugs were encountered during the development process.
+
+# Future Improvements
+
+In the future, enhancements such as refining the game's design and adding different levels will further elevate the gaming experience.
