@@ -33,6 +33,7 @@ The development journey of Connect 4: KITTENS VS PUPPIES was a blend of inputtin
 
 I first started with laying out my HTML to have a basic layout for my board.
 
+```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,9 +52,11 @@ I first started with laying out my HTML to have a basic layout for my board.
   
 </body>
 </html>
+```
 
 CSS styling was then applied to enhance the visual appeal of the game. Each element was meticulously designed to create an immersive gaming environment, with custom styles for tiles, buttons, and text.
 
+```
 
 /* CSS Styles for Game Elements */
 .board {
@@ -63,10 +66,11 @@ CSS styling was then applied to enhance the visual appeal of the game. Each elem
 .tile {
   /* Tile styling */
 }
-
+```
 
 The heart of the game lies in its JavaScript functionality, where game mechanics and interactivity were brought to life. Functions were implemented to handle dropping pieces, checking for a winner, and activating the cat bomb feature.
 
+```
 // Function to set up the game board
 function setGame() {
   board = [];
@@ -167,6 +171,8 @@ function dropBomb() {
   }
 }
 
+
+```
 
 Each line of code was carefully crafted and iteratively refined to ensure smooth gameplay and optimal user experience.
 
